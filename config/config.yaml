@@ -1,0 +1,47 @@
+# config/config_01.yaml
+
+samplesheet: "config/samplesheet.csv"
+
+workdir: "full/path/to/working/directory(this project directory)"
+
+reference:
+  build: "hg38"
+  fasta: "full/path/to/hg38.fa"
+  fai:   "full/path/to/hg38.fa.fai"
+  dict:  "full/path/to/hg38.dict"
+
+readgroup:
+  #filled RG in .bam file is required for Mutect2
+  PL: "ILLUMINA"
+  LB: "lib1"
+  PU: "unit1"
+  CN: "YourCenter"
+
+intervals:
+  #exome kit intervals should be in .interval_list format which may be obtained via gatk BedToIntervalList
+  target: "full/path/to/intervals"
+  bait: "full/path/to/intervals"
+
+#files for GATK Mutect2 can be downloaded here:
+# https://console.cloud.google.com/storage/browser/gatk-best-practices/somatic-hg38
+# https://console.cloud.google.com/storage/browser/genomics-public-data/resources/broad/hg38/v0
+
+gatk:
+  known_sites:
+    #Those files are bases of known human SNPs and indels used by gatk BaseRecalibrator to distinguish
+    #variants and sequencing errors
+    dbsnp: "full/path/to/Homo_sapiens_assembly38.dbsnp138.vcf"
+    mills: "full/path/to/Mills_and_1000G_gold_standard.indels.hg38.vcf.gz"
+
+mutect2:
+  #a gnomAD file with POS, ALT, AF used by Mutect2 to distinguish germline and somatic variants
+  germline_resource: "full/path/to/af-only-gnomad.hg38.vcf.gz"
+  #VCF with recurrent sequencing artifacts. Should be made later with our own normal samples data
+  panel_of_normals:  "full/path/to/1000g_pon.hg38.vcf.gz"
+  #Base of common SNPs with high VAF used by gatk GetPileupSummaries to calculate contamination
+  common_variants:   "full/path/to/small_exac_common_3.hg38.vcf.gz"
+
+vep:
+  cache_dir: "full/path/to/vep/cache/directory"
+  species: "homo_sapiens"
+  assembly: "GRCh38"
