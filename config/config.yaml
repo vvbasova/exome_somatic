@@ -45,3 +45,6 @@ vep:
   cache_dir: "full/path/to/vep/cache/directory"
   species: "homo_sapiens"
   assembly: "GRCh38"
+
+deepvariant:
+  container: "/full/path/to/deepvariant_1.8.0.sif"

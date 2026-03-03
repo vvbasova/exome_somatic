@@ -1,0 +1,10 @@
+name: vcfmerge_env
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - python=3.11
+  - pysam>=0.22
+  - bcftools>=1.18
+  - htslib>=1.18
+  - tabix

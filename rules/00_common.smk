@@ -2,6 +2,7 @@
 
 import os
 import csv
+import re
 
 ###############################################################################
 # Samplesheet parsing
@@ -57,6 +58,10 @@ def load_samples(path):
 SAMPLESHEET = config["samplesheet"]
 SAMPLES, SAMPLES_DICT = load_samples(SAMPLESHEET)
 
+for s in SAMPLES:
+    if not re.match(r"^[A-Za-z0-9_.-]+$", s):
+        raise ValueError(f"Invalid sample name (non-ASCII or forbidden chars): {s}")
+
 ###############################################################################
 # Config parsing
 ###############################################################################
@@ -84,6 +89,7 @@ INTERVALS = config["intervals"]
 TARGET_INTERVALS = INTERVALS["target"]
 BAIT_INTERVALS = INTERVALS["bait"]
 
+DEEPVARIANT_CONTAINER = config["deepvariant"]["container"]
 ###############################################################################
 # Helper functions
 ###############################################################################
