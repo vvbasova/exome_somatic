@@ -1,7 +1,10 @@
+name: gatk_env
+
 channels:
-  - conda-forge
   - bioconda
+  - conda-forge
+
 dependencies:
-  - gatk4
-  - openjdk
-  - samtools
+  - gatk4=4.6.2.0
+  - samtools=1.23
+  - openjdk=25

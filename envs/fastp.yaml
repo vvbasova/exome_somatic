@@ -1,5 +1,8 @@
+name: fastp_env
+
 channels:
-  - bioconda
   - conda-forge
+  - bioconda
+
 dependencies:
-  - fastp
+  - fastp=1.1.0=heae3180_0

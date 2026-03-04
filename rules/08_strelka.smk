@@ -1,7 +1,6 @@
 rule strelka:
     input:
         bam="results/07_bqsr_bam/{sample}/{sample}.recal.bam",
-        bai="results/07_bqsr_bam/{sample}/{sample}.recal.bam.bai",
         ref=REF_FASTA,
         manta_indels="results/11_manta/{sample}/results/variants/candidateSmallIndels.vcf.gz"
     output:

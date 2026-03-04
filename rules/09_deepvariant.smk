@@ -1,7 +1,6 @@
 rule deepvariant:
     input:
         bam="results/07_bqsr_bam/{sample}/{sample}.recal.bam",
-        bai="results/07_bqsr_bam/{sample}/{sample}.recal.bam.bai",
         ref=REF_FASTA
     output:
         vcf="results/13_deepvariant/{sample}/{sample}.DV.vcf.gz",

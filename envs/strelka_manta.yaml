@@ -1,12 +1,10 @@
+name: strelka_manta_env
+
 channels:
   - bioconda
   - conda-forge
   - defaults
 
 dependencies:
-  - python=2.7
   - manta=1.6.0
   - strelka=2.9.10
-  - tabix
-  - htslib
-  - boost=1.85

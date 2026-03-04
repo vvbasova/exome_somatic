@@ -1,7 +1,9 @@
 name: bcftools_env
+
 channels:
   - bioconda
   - conda-forge
+
 dependencies:
-  - bcftools
-  - htslib
+  - bcftools=1.23
+  - htslib=1.23

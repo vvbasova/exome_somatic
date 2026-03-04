@@ -1,7 +1,6 @@
 rule manta:
     input:
         bam="results/07_bqsr_bam/{sample}/{sample}.recal.bam",
-        bai="results/07_bqsr_bam/{sample}/{sample}.recal.bam.bai",
         ref=REF_FASTA
     output:
         indels="results/11_manta/{sample}/results/variants/candidateSmallIndels.vcf.gz",
