@@ -1,0 +1,12 @@
+channels:
+  - conda-forge
+  - bioconda
+  - anaconda
+dependencies:
+  - python=3.10
+  - pandas
+  - numpy
+  - pysam>=0.22
+  - openpyxl
+  - xlsxwriter
+  - xlrd

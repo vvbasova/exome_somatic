@@ -3,7 +3,8 @@ rule run_vep:
         vcf="results/15_merged/{sample}/{sample}.merged.vcf.gz",
         fasta=REF_FASTA
     output:
-        vcf="results/16_vep/{sample}/{sample}.merged.vep.vcf",
+        vcf="results/16_vep/{sample}/{sample}.merged.vep.vcf.gz",
+        tbi="results/16_vep/{sample}/{sample}.merged.vep.vcf.gz.tbi",
         stats="results/16_vep/{sample}/{sample}.merged.vep.stats.html"
     threads: 8
     resources:
@@ -27,10 +28,13 @@ rule run_vep:
           --fasta {input.fasta} \
           --vcf \
           -i {input.vcf} \
-          -o {output.vcf} \
+          -o STDOUT \
           --force_overwrite \
           --fork {threads} \
           --everything \
           --stats_file {output.stats} \
-          > {log} 2>&1
+          2> {log} \
+        | bgzip -c > {output.vcf}
+
+        tabix -f -p vcf {output.vcf}
         """

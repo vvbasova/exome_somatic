@@ -2,7 +2,7 @@
 wildcard_constraints:
     sample = r"[A-Za-z0-9_.-]+"
 
-configfile: "config/config_01.yaml"
+configfile: "config/config.yaml"
 
 
 include: "rules/00_common.smk"
@@ -18,21 +18,29 @@ include: "rules/09_deepvariant.smk"
 include: "rules/10_normalize_vcf.smk"
 include: "rules/11_merge_callers.smk"
 include: "rules/12_vep.smk"
+include: "rules/13_final_tables.smk"
+
 
 rule all:
     input:
         [
-            expand("results/16_vep/{sample}/{sample}.merged.vep.vcf",sample=SAMPLES),
+            expand("results/16_vep/{sample}/{sample}.merged.vep.vcf.gz",sample=SAMPLES),
+            expand("results/16_vep/{sample}/{sample}.merged.vep.vcf.gz.tbi",sample=SAMPLES),
 
-            expand("results/02_fastp/{sample}/{sample}.fastp.html", sample=SAMPLES),
+            expand("results/17_final_tables/{sample}/{sample}.qc_report.txt",sample=SAMPLES),
+            expand("results/17_final_tables/{sample}/{sample}_raw.csv",sample=SAMPLES),
+            expand("results/17_final_tables/{sample}/{sample}_filtered.csv",sample=SAMPLES),
+            expand("results/17_final_tables/{sample}/{sample}_vep_annotated.xlsx",sample=SAMPLES),
 
-            expand("results/03_align_stats/{sample}/{sample}.flagstat.txt", sample=SAMPLES),
-            expand("results/03_align_stats/{sample}/{sample}.idxstats.txt", sample=SAMPLES),
+            expand("results/02_fastp/{sample}/{sample}.fastp.html",sample=SAMPLES),
 
-            expand("results/04_dedup/{sample}/{sample}.markdup.metrics.txt", sample=SAMPLES),
-            expand("results/04_dedup_stats/{sample}/{sample}.flagstat.txt", sample=SAMPLES),
-            expand("results/04_dedup_stats/{sample}/{sample}.idxstats.txt", sample=SAMPLES),
+            expand("results/03_align_stats/{sample}/{sample}.flagstat.txt",sample=SAMPLES),
+            expand("results/03_align_stats/{sample}/{sample}.idxstats.txt",sample=SAMPLES),
 
-            expand("results/05_alignment_metrics/{sample}/{sample}.alignment_metrics.txt", sample=SAMPLES),
+            expand("results/04_dedup/{sample}/{sample}.markdup.metrics.txt",sample=SAMPLES),
+            expand("results/04_dedup_stats/{sample}/{sample}.flagstat.txt",sample=SAMPLES),
+            expand("results/04_dedup_stats/{sample}/{sample}.idxstats.txt",sample=SAMPLES),
+
+            expand("results/05_alignment_metrics/{sample}/{sample}.alignment_metrics.txt",sample=SAMPLES),
             expand("results/05_hs_metrics/{sample}/{sample}.hs_metrics.txt",sample=SAMPLES),
         ]
